@@ -106,18 +106,18 @@ class Code128Renderer:
         xtextpos = self.image_width / 2 - (xtextwidth / 2)
         ytextpos = bar_height + label_border
         draw.text((xtextpos, ytextpos), self.text, font=font)
-        return img
+        return img.convert('RGB')
 
     def write_file(self, filename, bar_width):
         """Write barcode data out to image file
         filename - the name of the image file or an file object
         bar_width - the desired width in pixels of each bar"""
         img = self.get_pilimage(bar_width)
-        img.save(filename, 'PNG')
+        img.save(filename, 'BMP')
 
     def get_imagedata(self, bar_width):
         """Write the matrix out as PNG to an bytestream"""
         imagedata = StringIO()
         img = self.get_pilimage(bar_width)
-        img.save(imagedata, "PNG")
+        img.save(imagedata, 'BMP')
         return imagedata.getvalue()
